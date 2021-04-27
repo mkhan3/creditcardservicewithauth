@@ -20,12 +20,22 @@ import static com.creditcard.creditcardservicewithauth.constants.SecurityConstan
 import static com.creditcard.creditcardservicewithauth.constants.SecurityConstants.TOKEN_PREFIX;
 import static com.creditcard.creditcardservicewithauth.constants.SecurityConstants.SECRET;
 
+/**
+ * Customize the BasicAuthenticationFilter of the spring framework.
+ * @author Administrator
+ *
+ */
 public class JWTAuthorizationFilter extends BasicAuthenticationFilter{
 	
 	public JWTAuthorizationFilter(AuthenticationManager authManager) {
         super(authManager);
     }
 
+	/**
+	 * This method intercepts the requests and then checks the authorization header.
+	 * If the header is present, the getAuthentication method is invoked. When the token 
+	 * is verified, it is saved to the SecurityContext.  
+	 */
     @Override
     protected void doFilterInternal(HttpServletRequest req,
                                     HttpServletResponse res,
