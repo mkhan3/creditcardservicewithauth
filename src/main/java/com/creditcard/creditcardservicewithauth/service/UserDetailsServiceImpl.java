@@ -11,6 +11,12 @@ import org.springframework.stereotype.Component;
 import com.creditcard.creditcardservicewithauth.repository.UserRepository;
 import com.creditcard.creditcardservicewithauth.repository.entity.User;
 
+/**
+ * The implementation of org.springframework.security.core.userdetails.UserDetailsService.
+ * 
+ * @author Administrator
+ *
+ */
 @Component
 public class UserDetailsServiceImpl implements UserDetailsService
 
