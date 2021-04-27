@@ -20,6 +20,13 @@ import com.creditcard.creditcardservicewithauth.filter.JWTAuthenticationFilter;
 import com.creditcard.creditcardservicewithauth.filter.JWTAuthorizationFilter;
 import com.creditcard.creditcardservicewithauth.service.UserDetailsServiceImpl;
 
+
+/**
+ * Customise WebSecurityConfigurerAdapter. Here the APIs are restricted and also 
+ * some whitelisted URLs are added that we will not need any authorization token. 
+ * @author Administrator
+ *
+ */
 @Configuration
 @EnableWebSecurity
 public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter{
@@ -40,6 +47,11 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter{
             "/webjars/**"
     };
 	
+	/**
+	 * CORS is configured here. The registration endpoint and AUTH_WHITELIST are permitted without security check.
+	 * JWTAuthenticationFilter and JWTAuthorizationFilter filters are added here. Add other ant matchers to 
+	 * filter based on URL patterns and roles.
+	 */
 	@Override
     protected void configure(HttpSecurity http) throws Exception {
         http.cors().and().csrf().disable().authorizeRequests()
