@@ -22,6 +22,12 @@ import com.auth0.jwt.algorithms.Algorithm;
 import com.creditcard.creditcardservicewithauth.repository.entity.User;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+/**
+ * Customisation of UsernamePasswordAuthenticationFilter which is the default class for password authentication in spring security.
+ *  
+ * @author Administrator
+ *
+ */
 public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilter{
 
 	
@@ -29,10 +35,18 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 
     public JWTAuthenticationFilter(AuthenticationManager authenticationManager) {
         this.authenticationManager = authenticationManager;
-
+        
+        // spring security will create /login end point automatically
         setFilterProcessesUrl("/login"); 
     }
     
+    /**
+     * This function will be invoked when the user tries to login to the application. 
+     * It reads the user given credentials and then check that to authenticate.
+     * An empty list along with username and password are passed where the empty list 
+     * represents the authorities (roles). The roles haven't been used yet.  
+     * It returns an Authentication object that contains the authorities.
+     */
     @Override
     public Authentication attemptAuthentication(HttpServletRequest req,
                                                 HttpServletResponse res) throws AuthenticationException {
@@ -51,6 +65,12 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
         }
     }
     
+    /**
+     * if the authentication is successful, this method will be invoked.
+     * A token is returned to user after authentication is successful.
+     * The token is created using username, a secret and expiration date.
+     *   
+     */
     @Override
     protected void successfulAuthentication(HttpServletRequest req,
                                             HttpServletResponse res,
